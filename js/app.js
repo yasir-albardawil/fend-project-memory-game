@@ -223,6 +223,7 @@ function stopTimer() {
 }
 
 function resetStars() {
+    starsCounter = 3;
     stars.lastElementChild.firstElementChild.classList.replace('fa-star-o', 'fa-star');
     stars.children[1].firstElementChild.classList.replace('fa-star-o', 'fa-star');
     stars.firstElementChild.firstElementChild.classList.replace('fa-star-o', 'fa-star');
