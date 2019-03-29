@@ -1,0 +1,350 @@
+html {
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    font-family: 'Coda', cursive;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 3em;
+}
+
+.deck .card {
+    height: 125px;
+    width: 125px;
+    background: #2e3d49;
+    font-size: 0;
+    color: #ffffff;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card.open {
+    transform: rotateY(0);
+    background: #02b3e4;
+    cursor: default;
+    animation: .2s ease-in openCard;
+}
+
+.deck .card.show {
+    font-size: 33px;
+}
+
+.deck .card.match {
+    cursor: default;
+    background: #02ccba;
+    font-size: 33px;
+    animation: .1s ease-in-out matchingCard;
+    -webkit-animation-iteration-count: 1;
+}
+
+.deck .card.mismatched-card {
+    background-color: #e74c3c;
+    animation: .8s mismatchedCard;
+}
+
+/*
+ * Styles for the Score Panel
+ */
+
+.score-panel {
+    text-align: left;
+    width: 345px;
+    margin-bottom: 10px;
+}
+
+.score-panel .stars {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+
+.score-panel .stars li {
+    list-style: none;
+    display: inline-block;
+}
+
+.score-panel .restart {
+    float: right;
+    cursor: pointer;
+}
+
+.winning-bg {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+}
+
+.winning {
+    height: 250px;
+    width: 55%;
+    margin: 250px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.winning .header {
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+}
+
+.winning .winning-title {
+    text-transform: uppercase;
+    text-align: center;
+}
+.winning .winning-time {
+    max-width: 50%;
+    margin: 45px auto auto;
+    text-align: center;
+}
+.winning .winning-moves {
+    max-width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+.winning .winning-rating {
+    max-width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+.winning .replay {
+    text-align: center;
+}
+
+.replay-btn {
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    border-radius: 10px;
+    color: #fff;
+    border: 0;
+    margin-top: 15px;
+    width: 90px;
+    height: 25px
+}
+
+.replay-btn:hover {
+    cursor: pointer;
+    outline-offset: 1px;
+}
+
+.timer {
+    font-size: 2em;
+    margin-bottom: 8px;
+}
+
+#days {
+    display: inline;
+}
+
+#hours {
+    display: inline;
+}
+
+#minutes {
+    display: inline;
+}
+
+@keyframes openCard {
+    from {
+        transform: rotateY(180deg)
+    }
+    to {
+        transform: rotateY(360deg)
+    }
+}
+
+@-webkit-keyframes openCard {
+    from {
+        transform: rotateY(180deg)
+    }
+    to {
+        transform: rotateY(360deg)
+    }
+}
+
+@-moz-keyframes openCard {
+    from {
+        transform: rotateY(180deg)
+    }
+    to {
+        transform: rotateY(360deg)
+    }
+}
+
+@-ms-keyframes openCard {
+    from {
+        transform: rotateY(180deg)
+    }
+    to {
+        transform: rotateY(360deg)
+    }
+}
+
+@-o-keyframes openCard {
+    from {
+        transform: rotateY(180deg)
+    }
+    to {
+        transform: rotateY(360deg)
+    }
+}
+
+@keyframes matchingCard {
+    from {
+        height: 130px;
+        width: 130px;
+    }
+    to {
+        height: 125px;
+        width: 125px
+    }
+}
+
+@-webkit-keyframes matchingCard {
+    from {
+        height: 130px;
+        width: 130px;
+    }
+    to {
+        height: 125px;
+        width: 125px
+    }
+}
+
+@-moz-keyframes matchingCard {
+    from {
+        height: 130px;
+        width: 130px;
+    }
+    to {
+        height: 125px;
+        width: 125px
+    }
+}
+
+@-ms-keyframes matchingCard {
+    from {
+        height: 130px;
+        width: 130px;
+    }
+    to {
+        height: 125px;
+        width: 125px
+    }
+}
+
+@-o-keyframes matchingCard {
+    from {
+        height: 130px;
+        width: 130px;
+    }
+    to {
+        height: 125px;
+        width: 125px
+    }
+}
+
+@-webkit-keyframes mismatchedCard {
+    from,
+    to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        -webkit-transform: translate3d(-10px, 0, 0);
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        -webkit-transform: translate3d(10px, 0, 0);
+        transform: translate3d(10px, 0, 0);
+    }
+}
+
+@keyframes mismatchedCard {
+    from,
+    to {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        -webkit-transform: translate3d(-10px, 0, 0);
+        transform: translate3d(-10px, 0, 0);
+    }
+
+    20%,
+    40%,
+    60%,
+    80% {
+        -webkit-transform: translate3d(10px, 0, 0);
+        transform: translate3d(10px, 0, 0);
+    }
+}
