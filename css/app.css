@@ -348,3 +348,9 @@ h1 {
         transform: translate3d(10px, 0, 0);
     }
 }
+
+@media screen and (min-width: 750px) {
+    .score-panel {
+        font-size: 1.8em;
+    }
+}
