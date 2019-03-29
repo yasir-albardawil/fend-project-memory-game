@@ -12,6 +12,7 @@ const winningMoves = document.querySelector('.winning-moves');
 const winningRating = document.querySelector('.winning-rating');
 const timer = document.querySelector('.timer');
 const cards = [...deck.children];
+
 let movesCounter = 0;
 let matches = 0;
 let starsCounter = 3;
@@ -40,7 +41,8 @@ let timerInterval;
 
 function initGame() {
     moves.textContent = `${movesCounter} moves`;
-    let shuffledCard = shuffle(cards);
+    // shuffle the list of cards using the provided "shuffle" method below
+    const shuffledCard = shuffle(cards);
     for (const card of shuffledCard) {
         deck.appendChild(card);
         card.classList.remove('open', 'show', 'match', 'mismatchedCard');
@@ -77,7 +79,7 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-
+// Add open and show classes to card
 function openCard(card) {
     startTimer();
     if (!card.target.classList.contains('open') && !card.target.classList.contains('fa')) {
@@ -85,6 +87,7 @@ function openCard(card) {
     }
 
     cardsMatch(card);
+
 }
 
 function mismatchedCard(firstCard, secondCard) {
@@ -99,14 +102,18 @@ function closeCard(firstCard, secondCard) {
     }, 550);
 }
 
+// for Matching the cards
 function cardsMatch(card) {
-    openCards.push(card.target);
+    if (card.target !== openCards[0] && card.target.firstElementChild.className !== 'fa') {
+        openCards.push(card.target);
+    }
     if (openCards.length === 2) {
         const firstCard = openCards[0].firstElementChild.classList.item(1);
         const secondCard = openCards[1].firstElementChild.classList.item(1);
+
         if (firstCard === secondCard) {
             matches++;
-            matchingCards(openCards[0], openCards[1]);
+            matchingCards(openCards[1], openCards[0]);
         } else {
             mismatchedCard(openCards[0], openCards[1]);
             closeCard(openCards[0], openCards[1]);
@@ -122,6 +129,8 @@ function cardsMatch(card) {
         secondCard.classList.add('match');
     }
 
+
+    // Game displays the current number of moves a user has made.
     function countMoves() {
         movesCounter++;
         moves.textContent = movesCounter === 1 ? `${movesCounter} move` : `${movesCounter} moves`;
@@ -135,12 +144,11 @@ function cardsMatch(card) {
         } else if (movesCounter === 20) {
             starsCounter--;
             stars.children[1].firstElementChild.classList.replace('fa-star', 'fa-star-o');
-        } else if (movesCounter === 30) {
-            starsCounter--;
-            stars.firstElementChild.firstElementChild.classList.replace('fa-star', 'fa-star-o');
         }
     }
 
+
+    // A restart button allows the player to reset the game board, the timer, and the star rating.
     function restartGame() {
         winningBg.style.display = 'none';
         openCards = [];
@@ -167,6 +175,9 @@ function addTowDigits(num) {
     return (num.toString().length < 2 ? `0${num}` : num).toString();
 }
 
+/* When a user wins the game,
+ a modal appears to congratulate the player and ask if they want to play again.
+ It should also tell the user how much time it took to win the game, and what the star rating was. */
 function openModal() {
     winningTime.textContent = `You completed the game successfully in ${timer.textContent}.`;
     winningMoves.textContent = `You've moved ${movesCounter}.`;
@@ -176,6 +187,7 @@ function openModal() {
     }, 550);
 }
 
+// When the player starts a game, a displayed timer should also start. Once the player wins the game, the timer stops.
 function setTimer() {
     let remainderSeconds = ++elapsedSeconds;
     days = Math.floor(remainderSeconds / 86400);
@@ -250,6 +262,7 @@ function resetTimer() {
     timerSeconds.textContent = '00';
 }
 
+// Reset the matching counter to 0
 function resetMatches() {
     matches = 0;
 }
